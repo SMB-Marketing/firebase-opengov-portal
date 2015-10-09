@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>Firebase Leaderboard Example</title>
+
+    <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.0.2/firebase.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="js/leaderboard.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/leaderboard.css">
+  </head>
+
+  <body>
+    <h1>Firebase Realtime Leaderboard</h1>
+
+    <table id="leaderboardTable" border=1 width=400>
+      <tr>
+        <th>Name</th>
+        <th>Score</th>
+      </tr>
+    </table>
+
+    <input type="text" id="nameInput" placeholder="Name">
+    <input type="text" id="scoreInput" placeholder="Score">
+
+    <div id="highestScore">
+      Highest score so far: <span id="highestScoreDiv"></span>
+    </div>
+  </body>
+</html>
