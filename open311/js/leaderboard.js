@@ -40,17 +40,28 @@ $(function() {
   var scoreListView = scoreListRef.limitToLast(LEADERBOARD_SIZE);
 
   // Add a callback to handle when a new score is added.
-  console.log('child_added');
-  scoreListView.on("child_added", function (newScoreSnapshot, prevScoreName) {
+  //console.log('child_added');
+  scoreListView.on("value", function (newScoreSnapshot) {
     const formatter = new JSONFormatter(newScoreSnapshot.val(), 100);
-    document.body.appendChild(formatter.render());
+    //document.body.appendChild(formatter.render());
+    //document.querySelector('#data').innerHTML=formatter.render();
+    //document.querySelector('#data').replaceChild(formatter.render());
+
+    var x = document.querySelector('#data');
+    var xChildren =x.childNodes;
+    if (xChildren[0])
+        x.replaceChild(formatter.render(), xChildren[0]);
+    else
+        x.appendChild(formatter.render());
+
+
     //console.log('child_added', JSON.stringify(newScoreSnapshot.val()));
-    handleScoreAdded(newScoreSnapshot, prevScoreName);
+    //handleScoreAdded(newScoreSnapshot, prevScoreName);
   });
 
   // Add a callback to handle when a score is removed
   scoreListView.on("child_removed", function (oldScoreSnapshot) {
-    handleScoreRemoved(oldScoreSnapshot);
+    //handleScoreRemoved(oldScoreSnapshot);
   });
 
   // Add a callback to handle when a score changes or moves positions.

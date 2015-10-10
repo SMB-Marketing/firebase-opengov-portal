@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Firebase Leaderboard Example</title>
+    <title>Firebase OpenGov Portal</title>
 
     <script src="./node_modules/json-formatter-js/dist/bundle.js"></script>
     <link rel="stylesheet" href="./node_modules/json-formatter-js/dist/style.css">
@@ -18,8 +18,9 @@
   </head>
 
   <body>
-    <h1>Firebase Realtime Leaderboard</h1>
+    <h1>Firebase Realtime OpenGov Portal</h1>
 
+<div style="display:none">
     <table id="leaderboardTable" border=1 width=400>
       <tr>
         <th>Name</th>
@@ -33,5 +34,7 @@
     <div id="highestScore">
       Highest score so far: <span id="highestScoreDiv"></span>
     </div>
+</div>
+    <div id="data"></div>
   </body>
 </html>
