@@ -42,7 +42,9 @@ $(function() {
   // Add a callback to handle when a new score is added.
   console.log('child_added');
   scoreListView.on("child_added", function (newScoreSnapshot, prevScoreName) {
-    console.log('child_added', JSON.stringify(newScoreSnapshot.val()));
+    const formatter = new JSONFormatter(newScoreSnapshot.val(), 100);
+    document.body.appendChild(formatter.render());
+    //console.log('child_added', JSON.stringify(newScoreSnapshot.val()));
     handleScoreAdded(newScoreSnapshot, prevScoreName);
   });
 
