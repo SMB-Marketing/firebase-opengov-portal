@@ -40,8 +40,9 @@ $(function() {
   var scoreListView = scoreListRef.limitToLast(LEADERBOARD_SIZE);
 
   // Add a callback to handle when a new score is added.
-  //console.log('child_added');
+  //console.log('value');
   scoreListView.on("value", function (newScoreSnapshot) {
+    //console.log(newScoreSnapshot.val());
     const formatter = new JSONFormatter(newScoreSnapshot.val(), 100);
     //document.body.appendChild(formatter.render());
     //document.querySelector('#data').innerHTML=formatter.render();

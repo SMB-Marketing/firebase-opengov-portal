@@ -1,6 +1,11 @@
 {
   "rules": {
+
+    ".read": true,
+    ".write": false,
+
     // Let everyone read and write to the "leaderboard" node
+    
     "leaderboard": {
       ".read": true,
       ".write": true,
