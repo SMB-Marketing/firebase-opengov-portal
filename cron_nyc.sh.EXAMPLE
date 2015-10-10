@@ -1,0 +1,2 @@
+#!
+/usr/bin/curl -X GET "https://api.cityofnewyork.us/311/v1/municipalservices?app_id=e1c35eb3&app_key=CITYOFNY-KEY-HERE&startDate=`date  +%m%d%Y`&endDate=`date -d "+30 days" +%m%d%Y`" | /usr/bin/curl -X PUT -d @- "https://open311.firebaseio.com/nyc.json?auth=FIREBASE-SECRET-HERE"
