@@ -2,8 +2,9 @@ $(function() {
   var LEADERBOARD_SIZE = 5;
 
   // Build some firebase references.
-  var rootRef = new Firebase("https://open311.firebaseio.com/leaderboard");
-  var scoreListRef = rootRef.child("scoreList");
+  //var rootRef = new Firebase("https://open311.firebaseio.com/leaderboard");
+  var rootRef = new Firebase("https://open311.firebaseio.com");
+  var scoreListRef = rootRef.child("nyc");
   var highestScoreRef = rootRef.child("highestScore");
 
   // Keep a mapping of firebase locations to HTML elements, so we can move / remove elements as necessary.
@@ -39,7 +40,9 @@ $(function() {
   var scoreListView = scoreListRef.limitToLast(LEADERBOARD_SIZE);
 
   // Add a callback to handle when a new score is added.
+  console.log('child_added');
   scoreListView.on("child_added", function (newScoreSnapshot, prevScoreName) {
+    console.log('child_added', JSON.stringify(newScoreSnapshot.val()));
     handleScoreAdded(newScoreSnapshot, prevScoreName);
   });
 
@@ -90,3 +93,4 @@ $(function() {
     $("#highestScoreDiv").text(newHighestScore.val());
   });
 });
+
