@@ -10,6 +10,38 @@ $(function() {
   // Keep a mapping of firebase locations to HTML elements, so we can move / remove elements as necessary.
   var htmlForPath = {};
 
+function traverse(x, level) {
+  if (isArray(x)) {
+    traverseArray(x, level);
+  } else if ((typeof x === 'object') && (x !== null)) {
+    traverseObject(x, level);
+  } else {
+    console.log('leaf:' + level + x);
+  }
+}
+
+function isArray(o) {
+  return Object.prototype.toString.call(o) === '[object Array]';
+}
+
+function traverseArray(arr, level) {
+  console.log(level + "<array>");
+  arr.forEach(function(x) {
+    traverse(x, level + "  ");
+  });
+}
+
+function traverseObject(obj, level) {
+  console.log(level + "<object>");
+  for (var key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      console.log(level + "  " + key + ":");
+      traverse(obj[key], level + "    ");
+    }
+  }
+}
+
+
   // Helper function that takes a new score snapshot and adds an appropriate row to our leaderboard table.
   function handleScoreAdded(scoreSnapshot, prevScoreName) {
     var newScoreRow = $("<tr/>");
@@ -41,9 +73,42 @@ $(function() {
 
   // Add a callback to handle when a new score is added.
   //console.log('value');
+
+    var searchfor='SUSPENDED';
+    //var searchfor='ON SCHEDULE';
+   //scoreListRef
+for (var i=0; i<30; i++){
+   rootRef.child('nyc/items/' +i+ '/items')
+    //.startAt(searchfor)
+    //.endAt(searchfor)
+    .orderByChild('status')
+    .equalTo(searchfor)
+    .on('value', function(snap) {
+       if (snap.val() !== null){
+       console.log('matching SUSPENDED:', snap.ref().parent().name());
+       snap.ref().parent().once('value', function(snap2){
+       console.log('snap2', snap2.val());
+       var obj2 = {'date':snap2.val(), 'data': snap.val()}
+        //const formatter = new JSONFormatter(snap.val(), 100);  // expand 100 level deep
+        const formatter = new JSONFormatter(obj2, 100);  // expand 100 level deep
+    var x = document.querySelector('#data-suspended');
+    var xChildren =x.childNodes;
+        x.appendChild(formatter.render());
+       });
+       //console.log('matching SUSPENDED:', JSON.stringify(snap.val()));
+
+        }
+    });
+}
+
   scoreListView.on("value", function (newScoreSnapshot) {
     //console.log(newScoreSnapshot.val());
-    const formatter = new JSONFormatter(newScoreSnapshot.val(), 100);
+    var obj1 = newScoreSnapshot.val();
+
+    //traverse(obj1,'');
+
+    const formatter = new JSONFormatter(obj1, 100);  // expand 100 level deep
+
     //document.body.appendChild(formatter.render());
     //document.querySelector('#data').innerHTML=formatter.render();
     //document.querySelector('#data').replaceChild(formatter.render());
