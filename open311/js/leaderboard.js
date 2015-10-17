@@ -93,6 +93,9 @@ for (var i=0; i<30; i++){
         const formatter = new JSONFormatter(obj2, 100);  // expand 100 level deep
     var x = document.querySelector('#data-suspended');
     var xChildren =x.childNodes;
+    //if (xChildren[0])
+        //x.insertBefore(formatter.render(), xChildren[0]);
+    //else
         x.appendChild(formatter.render());
        });
        //console.log('matching SUSPENDED:', JSON.stringify(snap.val()));
