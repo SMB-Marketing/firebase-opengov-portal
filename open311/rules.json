@@ -4,6 +4,42 @@
     ".read": true,
     ".write": false,
 
+    "nyc": {
+        "items": {
+            "0": { "items": { ".indexOn": ["status"] } },
+            "1": { "items": { ".indexOn": ["status"] } },
+            "2": { "items": { ".indexOn": ["status"] } },
+            "3": { "items": { ".indexOn": ["status"] } },
+            "4": { "items": { ".indexOn": ["status"] } },
+            "5": { "items": { ".indexOn": ["status"] } },
+            "6": { "items": { ".indexOn": ["status"] } },
+            "7": { "items": { ".indexOn": ["status"] } },
+            "8": { "items": { ".indexOn": ["status"] } },
+            "9": { "items": { ".indexOn": ["status"] } },
+            "10": { "items": { ".indexOn": ["status"] } },
+            "11": { "items": { ".indexOn": ["status"] } },
+            "12": { "items": { ".indexOn": ["status"] } },
+            "13": { "items": { ".indexOn": ["status"] } },
+            "14": { "items": { ".indexOn": ["status"] } },
+            "15": { "items": { ".indexOn": ["status"] } },
+            "16": { "items": { ".indexOn": ["status"] } },
+            "17": { "items": { ".indexOn": ["status"] } },
+            "18": { "items": { ".indexOn": ["status"] } },
+            "19": { "items": { ".indexOn": ["status"] } },
+            "20": { "items": { ".indexOn": ["status"] } },
+            "21": { "items": { ".indexOn": ["status"] } },
+            "22": { "items": { ".indexOn": ["status"] } },
+            "23": { "items": { ".indexOn": ["status"] } },
+            "24": { "items": { ".indexOn": ["status"] } },
+            "25": { "items": { ".indexOn": ["status"] } },
+            "26": { "items": { ".indexOn": ["status"] } },
+            "27": { "items": { ".indexOn": ["status"] } },
+            "28": { "items": { ".indexOn": ["status"] } },
+            "29": { "items": { ".indexOn": ["status"] } },
+            "30": { "items": { ".indexOn": ["status"] } }
+        }
+    },
+
     // Let everyone read and write to the "leaderboard" node
     
     "leaderboard": {

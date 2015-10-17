@@ -41,6 +41,66 @@ function traverseObject(obj, level) {
   }
 }
 
+function listen(searchfor, days, prepend) {
+    for (var i = 0; i < days; i++) {
+        var ref = rootRef.child('nyc/items/' + i + '/items')
+            .orderByChild('status')
+            .equalTo(searchfor);
+        if (prepend) {
+            ref.on('value', function(snap) {
+                if (snap.val() !== null) {
+                    snap.ref().parent().once('value', function(snap2) {
+                        var obj2 = {
+                            'date': snap2.val(),
+                            'data': snap.val()
+                        }
+                        const formatter = new JSONFormatter(obj2, 100); // expand 100 level deep
+                        var x = document.querySelector('#data-suspended-updates');
+                        var xChildren = x.childNodes;
+                        if (xChildren[0])
+                            x.insertBefore(formatter.render(), xChildren[0]);
+                        else
+                            x.appendChild(formatter.render());
+                    });
+
+                }
+            });
+        } else {
+            ref.once('value', function(snap) {
+                if (snap.val() !== null) {
+                    snap.ref().parent().once('value', function(snap2) {
+                    //console.log('qqq000',snap2.val().date);
+                    //console.log('qqq000',typeof snap2.val().date);
+                    //console.log('qqq000',Date.parse( snap2.val().date) );
+                    //console.log('qqq000',new Date());
+                    //console.log('qqq000',Date.parse(snap2.val().date)-new Date().getTime());
+                    //var A = Date.parse(snap2.val().date)-new Date().getTime();
+                    var A = Date.parse(snap2.val().date)-new Date();
+                    //seconds=(A/1000)%60;
+                    //minutes=(A/(1000*60))%60;
+                    //hours=(A/(1000*60*60))%24;
+                    var days = parseInt(A/(1000*60*60*24));
+
+                    //console.log('days from now', days);
+
+                    //console.log('qqq111',snap2.val());
+                    //console.log('qqq222',snap.val());
+                        var obj2 = {
+                            'days': 'days from now: ' + days,
+                            'date': snap2.val(),
+                            'data': snap.val()
+                        }
+                        const formatter = new JSONFormatter(obj2, 100); // expand 100 level deep
+                        var x = document.querySelector('#data-suspended');
+                        var xChildren = x.childNodes;
+                        x.appendChild(formatter.render());
+                    });
+
+                }
+            });
+        }
+    }
+}
 
   // Helper function that takes a new score snapshot and adds an appropriate row to our leaderboard table.
   function handleScoreAdded(scoreSnapshot, prevScoreName) {
@@ -75,8 +135,13 @@ function traverseObject(obj, level) {
   //console.log('value');
 
     var searchfor='SUSPENDED';
+    var DAYS=30;
     //var searchfor='ON SCHEDULE';
    //scoreListRef
+   listen(searchfor,DAYS,false);
+   listen(searchfor,DAYS,true);
+
+/*
 for (var i=0; i<30; i++){
    rootRef.child('nyc/items/' +i+ '/items')
     //.startAt(searchfor)
@@ -103,6 +168,7 @@ for (var i=0; i<30; i++){
         }
     });
 }
+*/
 
   scoreListView.on("value", function (newScoreSnapshot) {
     //console.log(newScoreSnapshot.val());
